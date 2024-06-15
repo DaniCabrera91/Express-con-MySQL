@@ -20,7 +20,7 @@ router.get('/getDescendent', ProductController.getDesc)
 
 router.get('/productsByName/:productName', ProductController.getByName) 
 
-router.delete('/delte/:id', ProductController.delete)
+router.delete('/delete/:id', ProductController.delete)
 
 
 module.exports = router
