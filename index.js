@@ -6,6 +6,9 @@ const app = express()
 app.use(express.json())
 app.use('/products', require('./routes/products'))
 app.use('/categories', require('./routes/categories'))
+app.use('/users', require('./routes/users'))
+app.use('/orders', require('./routes/orders'))
+
 
 const PORT = 3000
 
@@ -21,3 +24,9 @@ app.get('/createdb', (req, res) => {
 })
 
 app.listen(PORT, () => console.log(`server started at port ${PORT}`))
+
+
+
+
+
+

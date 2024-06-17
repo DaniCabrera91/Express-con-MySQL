@@ -2,7 +2,16 @@ const db = require('../config/database')
 const ProductControllers = {
 
     table(req, res) {
-        const sql = 'CREATE TABLE products(id int AUTO_INCREMENT,product_name VARCHAR(255), description VARCHAR(255), price int(50), categories_id int, PRIMARY KEY(id), FOREIGN KEY (categories_id) REFERENCES categories(id))'
+        const sql = `CREATE TABLE products(
+        id int AUTO_INCREMENT,
+        product_name VARCHAR(255), 
+        description VARCHAR(255), 
+        price int(50), 
+        categories_id int, 
+        PRIMARY KEY(id), 
+        FOREIGN KEY (categories_id) REFERENCES categories(id)
+        )`
+        
         db.query(sql, (err, result) => {
             if (err) throw err
             console.log(result)
@@ -12,8 +21,8 @@ const ProductControllers = {
 
     create(req, res) {
         const {product_name, description, price, categories_id} = req.body
-        if (!product_name || !description || !price || !categories_id) return res.status(400).send('Error: Falta algún campo por rellenar');
-        const sql = `INSERT INTO products (product_name, description, price, categories_id) values ('${product_name}', '${description}', '${price}', '${categories_id}');`
+        if (!product_name || !description || !price || !categories_id) return res.status(400).send('Error: Falta algún campo por rellenar')
+        const sql = `INSERT INTO products (product_name, description, price, categories_id) values ('${product_name}', '${description}', '${price}', '${categories_id}')`
        
         db.query(sql, (err, result) => {
             if (err) throw err
