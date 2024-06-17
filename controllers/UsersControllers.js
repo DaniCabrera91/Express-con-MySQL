@@ -49,23 +49,6 @@ const UsersControllers = {
         })
     },
 
-    getWithOrder(req, res) {
-        const sql = `
-        SELECT users.first_name, users.last_name, users.email, users.address, orders.order_date, orders.final_price, orders.user_id 
-        FROM users
-        INNER JOIN orders`
-      
-        db.query(sql, (err, result) => {
-            if (err) throw err
-            if (result.length === 0) {
-                res.status(404).send('No se encontraron productos')
-            } else {
-                res.status(200).json(result);
-            }
-        })
-    },
-      
-
     getById(req, res) {
         const id = parseInt(req.params.id);
         const sql = `SELECT * FROM users WHERE id = ${id}`

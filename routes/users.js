@@ -12,8 +12,6 @@ router.put('/update/:id', UsersControllers.update)
 
 router.get('/', UsersControllers.get)
 
-router.get('/getWithOrder', UsersControllers.getWithOrder)
-
 router.get('/getById/:id', UsersControllers.getById)
   
 router.delete('/delete/:id', UsersControllers.delete)

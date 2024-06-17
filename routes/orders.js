@@ -15,5 +15,7 @@ router.get('/', OrdersControllers.get)
 
 router.get('/id/:id', OrdersControllers.getById)  
 
+router.get('/getWithUser', OrdersControllers.getWithUser)
+
 
 module.exports = router
