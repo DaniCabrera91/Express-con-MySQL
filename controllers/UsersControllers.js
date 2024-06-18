@@ -7,7 +7,7 @@ const UsersControllers = {
         first_name VARCHAR(20), 
         last_name VARCHAR(50),
         email VARCHAR(255), 
-        address VARCHAR(255), 
+        address VARCHAR(255),
         PRIMARY KEY(id)
         )`
 
@@ -17,7 +17,6 @@ const UsersControllers = {
             res.status(200).send('Users table created...')
         })
     },
-
 
     create(req, res) {
         const {first_name, last_name, email, address} = req.body
@@ -48,7 +47,7 @@ const UsersControllers = {
             res.status(200).json(result)
         })
     },
-
+    
     getById(req, res) {
         const id = parseInt(req.params.id);
         const sql = `SELECT * FROM users WHERE id = ${id}`
@@ -62,20 +61,33 @@ const UsersControllers = {
         })
     },
 
+    getWithOrder(req, res) {
+        const sql = `
+        SELECT users.first_name, users.last_name, users.email, users.address, orders.order_date, orders.final_price 
+        FROM users
+        INNER JOIN orders WHERE orders.user_id = users.id`
+        db.query(sql, (err, result) => {
+            if (err) throw err
+            if (result.length === 0) {
+                res.status(404).send('No se encontraron pedidos asignados a usuarios')
+            } else {
+                res.status(200).json(result);
+            }
+        })
+    },
 
     delete(req, res) {
         const id = parseInt(req.params.id)
         const sql = `DELETE FROM users WHERE id = ${id}`
         db.query(sql, (err, result) => {
-          if (err) throw err
-          if (result === 0) {
+            if (err) throw err
+            if (result === 0) {
             res.status(404).send('Usuario no encontrado')
-          } else {
+            } else {
             res.status(200).send('Usuario eliminado')
           }
         })
-      }
-
+    }
 }
 
 module.exports = UsersControllers

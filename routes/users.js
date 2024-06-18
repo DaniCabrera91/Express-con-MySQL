@@ -13,7 +13,10 @@ router.put('/update/:id', UsersControllers.update)
 router.get('/', UsersControllers.get)
 
 router.get('/getById/:id', UsersControllers.getById)
-  
+
+router.get('/getWithOrder', UsersControllers.getWithOrder)
+
+
 router.delete('/delete/:id', UsersControllers.delete)
 
 
